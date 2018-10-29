@@ -5,6 +5,17 @@ class Validator:
     """
     validation class to add product.
     """
+    def user_validator(self, username, contact, role, password):
+        """
+        Method validates the user input and return appropriate message
+        """
+        if not username:
+            return "username is missing"
+        if username == "":
+            return "username is missing"
+        if not re.match(r"^[a-zA-Z\d]+[-_])*[a-zA-Z\d*]+$)", username):
+            return "username should contain no white spaces"
+        
 
     def validate_product_inputs(self, product_name, quantity, price):
         """
