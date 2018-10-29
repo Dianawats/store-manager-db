@@ -1,0 +1,13 @@
+.vscode/
+venv/
+__pycache__
+.pytest_cache
+app/__pycache__
+tests/__pycache__
+.coverage
+*.pyc
+app/*.pyc
+app/models/*.pyc
+app/models/__pycache__/*.pyc
+tests/__pycache__/*.pyc
+tests/*.pyc
