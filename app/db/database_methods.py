@@ -1,4 +1,4 @@
-from app.db.dbmanager import DatabaseConnection 
+from app.db.databmanager import DatabaseConnection 
 
 class DBFunctions:
     def __init__(self):
