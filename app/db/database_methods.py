@@ -1,4 +1,4 @@
-from app.db.databasemanager import DatabaseConnection 
+from app.db.databmanager import DatabaseConnection 
 
 class DBMethods:
     def __init__(self):
@@ -40,3 +40,49 @@ class DBMethods:
         self.cursor.execute(query)
         user =self.cursor.fetchone()
         return user
+
+    def add_new_product(self, product, quantity, price):
+        """This method adds new product item"""
+        query = (
+            """INSERT INTO products (product, quantity, price) VALUES ('{}', '{}', '{}')""".
+            format(product, quantity, price))
+        self.cursor.execute(query)
+
+    def does_product_exist(self,product):
+        """This method checks whether product exists"""
+        query = ("""SELECT * FROM products where product = '{}'""".format(product))
+        self.cursor.execute(query)
+        product = self.cursor.fetchone()
+        if product:
+            return product
+        return False
+
+    def update_product(self, product, quantity, price, product_id):
+        """This method updates the product"""
+        try:
+            query = ("""UPDATE products SET product = '{}', quantity = '{}', price = '{}' where product_id = '{}'""" .format(
+                product, quantity, price, product_id))
+            self.cursor.execute(query)
+            count = self.cursor.rowcount
+            if int(count) > 0:
+                return True
+            else:
+                return False   
+        except:
+            return False
+
+    def get_single_product(self,product_id):
+        """This method gets a single product"""
+        self.cursor.execute("SELECT * FROM products WHERE product_id = '{}'" .format(product_id))
+        row = self.cursor.fetchone()
+        return row
+
+    def delete_product(self, product_id):
+        """This method deletes a specific product"""
+        query = ("""DELETE FROM products WHERE product_id = '{}'""" .format(product_id))
+        self.cursor.execute(query)
+        delete = self.cursor.rowcount
+        if int(delete) > 0:
+            return True
+        else:
+            return False   
