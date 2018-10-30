@@ -1,5 +1,6 @@
 from flask import jsonify, request, Blueprint
 from flask.views import MethodView
+from functools import wraps
 from flask_jwt_extended import (create_access_token, 
                                 get_jwt_identity, 
                                 verify_jwt_in_request)
@@ -14,6 +15,7 @@ auth_blueprint = Blueprint("auth_blueprint", __name__)
 
 class RegisterStoreAttendant(MethodView):
     """This class view registers store attendants"""
+    @requires_admin_permission
     
     def post(self):
         #registers a store attendant
@@ -79,6 +81,17 @@ auth_blueprint.add_url_rule("/api/auth/register",view_func=registration_view, me
 login_view = LoginView.as_view("login_view")
 auth_blueprint.add_url_rule("/api/auth/login",view_func=login_view, methods=["POST"])
 
-
-
+def requires_admin_permission(zy):
+    #  A decorator function to wrap and replace the normal jwt_required function
+    @wraps(zy)
+    def decorated_function(*args, **kwargs):
+        # check user role in token.
+        verify_jwt_in_request()
+        logged_user = get_jwt_identity()
+        user_role = user_handler.get_user_role(username=logged_user)
+        if user_role["role"] != 'admin':
+            return jsonify({"message": "You need to get permission from admin to access this route"}), 403
+        else:
+            return zy(*args, **kwargs)
+    return decorated_function
 

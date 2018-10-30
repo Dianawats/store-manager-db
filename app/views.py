@@ -3,6 +3,7 @@ from flask.views import MethodView
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.validation import Validator
 from app.handlers.product_handler import ProductHandler
+from app.authentication.authenticate import requires_admin_permission
 
 validate = Validator()
 product_handler = ProductHandler()
@@ -11,6 +12,7 @@ views_blueprint = Blueprint("views_blueprint", __name__)
 
 class AddProduct(MethodView):
     """This class adds products"""
+    @requires_admin_permission
     def post(self):
         try:
             data = request.get_json()
