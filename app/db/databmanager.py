@@ -23,7 +23,7 @@ class DatabaseConnection:
             CREATE TABLE IF NOT EXISTS users (
                 user_id SERIAL PRIMARY KEY,
                 username VARCHAR(255) NOT NULL,
-                contact VARCHAR(50) NOT NULL,
+                phone VARCHAR(50) NOT NULL,
                 role VARCHAR(50) NOT NULL,
                 password VARCHAR(50) NOT NULL
             )

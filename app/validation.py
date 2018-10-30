@@ -13,9 +13,9 @@ class Validator:
             return "username is missing"
         if username == "":
             return "username is missing"
-        if not re.match(r"^[a-zA-Z\d]+[-_])*[a-zA-Z\d*]+$)", username):
+        if not re.match(r"^[a-zA-Z\d]+[-_]*[a-zA-Z\d*]+$", username):
             return "username should contain no white spaces"
-        if not re.match("^\d{4}-\d{6}$",phone):
+        if not re.match(r"^\d{4}-\d{6}$",phone):
             return "phone format should be [07zz-zzzzzz],in digits without white spaces"
         if (role != "admin" and role != "attendant"):
             return "role should either be admin or attendant"    
