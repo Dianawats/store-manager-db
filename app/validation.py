@@ -25,7 +25,7 @@ class Validator:
             return "password is missing"
         
 
-    def validate_product_inputs(self, product_name, quantity, price):
+    def product_validator(self, product_name, quantity, price):
         """
         Method validates the product input and return appropriate message
         """

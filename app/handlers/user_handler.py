@@ -1,4 +1,4 @@
-from app.db.db_methods import DBMethods
+from app.db.database_methods import DBMethods
 from app.models.user import User
 
 
@@ -9,7 +9,7 @@ class UserHandler:
         self.dbconn = DBMethods()
 
     def add_attendant(self, username, phone, role, password):
-        """This method adds new user"""
+        """This method adds new attendant"""
 
         user = User(username, phone, role, password)
         self.dbconn.add_new_user(
@@ -22,7 +22,7 @@ class UserHandler:
         """
         This method checks wether the user supplied exists already
         """
-        exists_user = self.dbconn.is_username_exist(username=username)
+        exists_user = self.dbconn.does_username_exist(username=username)
         if exists_user:
             return True
         return False
@@ -31,7 +31,7 @@ class UserHandler:
         """
         This method checks whether the phone supplied already exists
         """
-        phone_exists = self.dbconn.is_phone_exist(phone=phone)
+        phone_exists = self.dbconn.does_phone_exist(phone=phone)
         if phone_exists:
             return True
         return False
@@ -44,6 +44,6 @@ class UserHandler:
         return False
 
     def get_user_role(self, username):
-        """# This method gets the current user role"""
-        user = self.dbconn.is_username_exist(username=username)
+        """This method gets the current user role"""
+        user = self.dbconn.does_username_exist(username=username)
         return user    
