@@ -111,19 +111,19 @@ class UpdateProduct(MethodView):
         return jsonify({"message": "You missed some key in your request body"}), 400
 
 
-class DeleteProduct(MethodView):
-    """This class deletes the product"""
+# class DeleteProduct(MethodView):
+#     """This class deletes the product"""
     
-    def delete(self, product_id):
-        invalid = validate.validate_input_type(product_id)
-        if invalid:
-            return jsonify({"message": invalid}), 400
-        delete = product_handler.delete_product(product_id=product_id)
-        if delete:
-            return jsonify({"message": "product successfully deleted"}), 200
-        else:
-            return jsonify({"message": 
-                            "product not yet deleted, or no existing product"}), 400
+#     def delete(self, product_id):
+#         invalid = validate.validate_input_type(product_id)
+#         if invalid:
+#             return jsonify({"message": invalid}), 400
+#         delete = product_handler.delete_product(product_id=product_id)
+#         if delete:
+#             return jsonify({"message": "product successfully deleted"}), 200
+#         else:
+#             return jsonify({"message": 
+#                             "product not yet deleted, or no existing product"}), 400
 
 
 add_product_view = AddProduct.as_view("add_product_view")
