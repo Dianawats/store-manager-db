@@ -22,23 +22,35 @@ class DatabaseConnection:
             """
             CREATE TABLE IF NOT EXISTS users (
                 user_id SERIAL PRIMARY KEY,
-                username VARCHAR(255) NOT NULL,
+                username VARCHAR(50) unique,
                 phone VARCHAR(50) NOT NULL,
-                role VARCHAR(50) NOT NULL,
-                password VARCHAR(50) NOT NULL
+                role VARCHAR(10) NOT NULL,
+                password VARCHAR(25) NOT NULL
             )
             """,
 
             """
 			CREATE TABLE IF NOT EXISTS products (
 				product_id SERIAL PRIMARY KEY,
-					product VARCHAR(255) NOT NULL,
+					product VARCHAR(50) NOT NULL,
 					quantity INTEGER NOT NULL,
 					price INTEGER NOT NULL,
                     reg_date timestamp NOT NULL
 							
 						)
 					"""
+            ,
+
+            """
+            CREATE TABLE IF NOT EXISTS sales (
+                sale_id SERIAL PRIMARY KEY,
+                product VARCHAR(50) NOT NULL,
+                quantity INTEGER NOT NULL,
+                amount INTEGER NOT NULL,
+                attendant VARCHAR(50) NOT NULL,
+                date timestamp NOT NULL
+            )
+            """
         )
            
         for query in queries:
@@ -50,6 +62,8 @@ class DatabaseConnection:
             """DROP TABLE IF EXISTS users CASCADE""",
 
             """DROP TABLE IF EXISTS products CASCADE""",
+
+            """DROP TABLE IF EXISTS saless CASCADE""",
 
         )
         for query in delete_queries:

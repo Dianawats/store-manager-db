@@ -12,3 +12,7 @@ app/models/*.pyc
 app/models/__pycache__/*.pyc
 tests/__pycache__/*.pyc
 tests/*.pyc
+app/authentication/*.pyc
+app/handlers/*.pyc
+app/db/*.pyc
+app/models/*.pyc

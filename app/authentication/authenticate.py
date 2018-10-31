@@ -15,7 +15,6 @@ auth_blueprint = Blueprint("auth_blueprint", __name__)
 
 class RegisterStoreAttendant(MethodView):
     """This class view registers store attendants"""
-    @requires_admin_permission
     
     def post(self):
         #registers a store attendant
