@@ -41,11 +41,11 @@ class DBMethods:
         user =self.cursor.fetchone()
         return user
 
-    def add_new_product(self, product, quantity, price):
+    def add_new_product(self, product, quantity, price, reg_date):
         """This method adds new product item"""
         query = (
-            """INSERT INTO products (product, quantity, price) VALUES ('{}', '{}', '{}')""".
-            format(product, quantity, price))
+            """INSERT INTO products (product, quantity, price, reg_date) VALUES ('{}', '{}', '{}', '{}')""".
+            format(product, quantity, price, reg_date))
         self.cursor.execute(query)
 
     def does_product_exist(self,product):
@@ -57,11 +57,11 @@ class DBMethods:
             return product
         return False
 
-    def update_product(self, product, quantity, price, product_id):
+    def update_product(self, product, quantity, price, product_id, reg_date):
         """This method updates the product"""
         try:
-            query = ("""UPDATE products SET product = '{}', quantity = '{}', price = '{}' where product_id = '{}'""" .format(
-                product, quantity, price, product_id))
+            query = ("""UPDATE products SET product = '{}', quantity = '{}', price = '{}', reg_date = '{}' where product_id = '{}'""" .format(
+                product, quantity, price, product_id, reg_date ))
             self.cursor.execute(query)
             count = self.cursor.rowcount
             if int(count) > 0:
@@ -76,6 +76,12 @@ class DBMethods:
         self.cursor.execute("SELECT * FROM products WHERE product_id = '{}'" .format(product_id))
         row = self.cursor.fetchone()
         return row
+
+    def get_all_products(self):
+        """This method gets all products being added"""
+        self.cursor.execute("SELECT * from products")
+        all_products = self.cursor.fetchall()
+        return all_products     
 
     def delete_product(self, product_id):
         """This method deletes a specific product"""
