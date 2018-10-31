@@ -10,7 +10,7 @@ class SaleHandler:
     def add_sale_record(self, product_id, quantity, attendant, date):
         """Method for creating a sale record"""
 
-        item = self.dbconn.fetch_single_product(product_id=product_id)
+        item = self.dbconn.get_single_product(product_id=product_id)
         if item:
             product = item["product"]
             _quantity = int(quantity)

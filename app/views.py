@@ -149,3 +149,43 @@ delete_product_view = DeleteProduct.as_view("delete_product_view")
 views_blueprint.add_url_rule(
     "/api/v2/products/<product_id>", view_func=delete_product_view, methods=["DELETE"])
 
+class CreateSalesRecord(MethodView):
+    @jwt_required
+    def post(self, product_id):
+        data = request.get_json()
+        if "quantity" in data.keys():
+            quantity = data.get("quantity")
+            date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            attendant = get_jwt_identity()
+            invalid_quantity = validate.validate_input_type(quantity)
+            if invalid_quantity:
+                return jsonify({"message": invalid_quantity}), 400
+            invalid_id = validate.validate_input_type(product_id)
+            if invalid_id:
+                return jsonify({"message": invalid_id}), 400
+            make_sale = sale_handler.add_sale_record(
+                product_id=product_id, quantity=quantity, attendant=attendant, date=date)
+            if make_sale:
+                return jsonify({"message": "sale record added successfully", "sales": db_func.get_new_sale()}), 201
+            else:
+                return jsonify({"message": "sale record is not added or product is not available"}), 400
+
+class FetchAllSales(MethodView):
+    @jwt_required
+    def get(self):
+        logged_user = get_jwt_identity()
+        user_role = user_handler.get_user_role(user_name=logged_user)
+        if user_role["role"] == 'admin':
+            all_sales = sale_handler.get_all_sales()
+        elif user_role["role"] == 'attendant':
+            all_sales = sale_handler.get_all_sales_for_user(user_name=logged_user)
+        if all_sales:
+            return jsonify({"Sale Records": all_sales}), 200
+        return jsonify({"message": "no sales recorded"}), 404    
+
+make_sales_view = CreateSalesRecord.as_view("make_sales_view")
+all_sales_view = FetchAllSales.as_view("all_sales_view")
+
+views_blueprint.add_url_rule("/api/v2/sales/<product_id>", view_func=make_sales_view, methods=["POST"])
+views_blueprint.add_url_rule("/api/v2/sales", view_func=all_sales_view, methods=["GET"])
+
