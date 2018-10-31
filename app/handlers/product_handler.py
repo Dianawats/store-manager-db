@@ -39,10 +39,10 @@ class ProductHandler:
             return product
         return False
 
-    # def get_all_products(self):
-    #     """This method gets all available products"""
-    #     all_products = self.dbconn.get_all_products()
-    #     return all_products
+    def get_all_products(self):
+        """This method gets all available products"""
+        all_products = self.dbconn.get_all_products()
+        return all_products
 
     # def delete_product(self, product_id):
     #     """This method deletes a product"""
