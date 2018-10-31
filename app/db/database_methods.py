@@ -91,4 +91,29 @@ class DBMethods:
         if int(delete) > 0:
             return True
         else:
-            return False   
+            return False 
+
+    def create_sale_record(self, product, quantity, amount, attendant, date):
+        """This method creates a sale record"""
+        query = (
+            """INSERT INTO sales (product, quantity, amount, attendant, date) 
+               VALUES ('{}', '{}', '{}', '{}', '{}')""".format(product, quantity, amount, attendant, date))
+        self.cursor.execute(query)
+    
+    def get_new_sale(self):
+        """This method gets the most recent sale record being made """ 
+        self.cursor.execute("SELECT * FROM sales ORDER BY sale_id DESC LIMIT 1")
+        new_record = self.cursor.fetchall()
+        return new_record
+
+    def get_all_sales(self):
+        """This method gets all available sales"""
+        self.cursor.execute("SELECT * from sales")
+        all_sales = self.cursor.fetchall()
+        return all_sales
+
+    def get_all_sales_for_user(self, username):
+        """This method gets all available sales"""
+        self.cursor.execute("SELECT * FROM sales WHERE attendant = '{}'" .format(username))
+        sale_record = self.cursor.fetchall()
+        return sale_record   
