@@ -44,9 +44,9 @@ class ProductHandler:
         all_products = self.dbconn.get_all_products()
         return all_products
 
-    # def delete_product(self, product_id):
-    #     """This method deletes a product"""
-    #     delete_item = self.dbconn.delete_product(product_id=product_id)
-    #     if delete_item:
-    #         return True
-    #     return False
+    def delete_product(self, product_id):
+        """This method deletes a product"""
+        delete_item = self.dbconn.delete_product(product_id=product_id)
+        if delete_item:
+            return True
+        return False

@@ -14,7 +14,7 @@ views_blueprint = Blueprint("views_blueprint", __name__)
 class AddProduct(MethodView):
 
     """This class adds products"""
-    # @requires_admin_permission
+    @requires_admin_permission
     def post(self):
         try:
             data = request.get_json()
@@ -37,7 +37,8 @@ class AddProduct(MethodView):
                                                       quantity=new_quantity,
                                                       price=price, 
                                                       
-                                                      product_id=product_exists["product_id"], reg_date=reg_date)
+                                                      product_id=product_exists["product_id"], 
+                                                      reg_date=reg_date)
                                                       
                     return jsonify({
                         "message":
@@ -91,6 +92,7 @@ class UpdateProduct(MethodView):
             product = data.get("product")
             quantity = data.get("quantity")
             price = data.get("price")
+            reg_date = data.get("reg_date")
 
             invalid = validate.product_validator(
                 product, quantity, price)
@@ -98,9 +100,9 @@ class UpdateProduct(MethodView):
                 return jsonify({"message": invalid}), 400
             update = product_handler.update_product(
                 product_name=product, quantity=quantity, 
-                                      price=price,
-                                      reg_date=reg_date, 
-                                      product_id=product_id)
+                                      price=price, 
+                                      product_id=product_id,
+                                      reg_date=reg_date)
             if update:
                 return jsonify({
                     "message":
@@ -111,19 +113,19 @@ class UpdateProduct(MethodView):
         return jsonify({"message": "You missed some key in your request body"}), 400
 
 
-# class DeleteProduct(MethodView):
-#     """This class deletes the product"""
+class DeleteProduct(MethodView):
+    """This class deletes the product"""
     
-#     def delete(self, product_id):
-#         invalid = validate.validate_input_type(product_id)
-#         if invalid:
-#             return jsonify({"message": invalid}), 400
-#         delete = product_handler.delete_product(product_id=product_id)
-#         if delete:
-#             return jsonify({"message": "product successfully deleted"}), 200
-#         else:
-#             return jsonify({"message": 
-#                             "product not yet deleted, or no existing product"}), 400
+    def delete(self, product_id):
+        invalid = validate.validate_input_type(product_id)
+        if invalid:
+            return jsonify({"message": invalid}), 400
+        delete = product_handler.delete_product(product_id=product_id)
+        if delete:
+            return jsonify({"message": "product successfully deleted"}), 200
+        else:
+            return jsonify({"message": 
+                            "product not yet deleted, or no existing product"}), 400
 
 
 add_product_view = AddProduct.as_view("add_product_view")

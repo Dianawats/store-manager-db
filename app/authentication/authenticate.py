@@ -81,7 +81,9 @@ login_view = LoginView.as_view("login_view")
 auth_blueprint.add_url_rule("/api/auth/login",view_func=login_view, methods=["POST"])
 
 def requires_admin_permission(zy):
-    #  A decorator function to wrap and replace the normal jwt_required function
+    """
+    This is a decorator function to wrap and replace the normal jwt_required function
+    """
     @wraps(zy)
     def decorated_function(*args, **kwargs):
         # check user role in token.
