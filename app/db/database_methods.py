@@ -41,11 +41,11 @@ class DBMethods:
         user =self.cursor.fetchone()
         return user
 
-    def add_new_product(self, product, quantity, price, reg_date):
+    def add_new_product(self, product, quantity, price):
         """This method adds new product item"""
         query = (
-            """INSERT INTO products (product, quantity, price, reg_date) VALUES ('{}', '{}', '{}', '{}')""".
-            format(product, quantity, price, reg_date))
+            """INSERT INTO products (product, quantity, price) VALUES ('{}', '{}', '{}')""".
+            format(product, quantity, price))
         self.cursor.execute(query)
 
     def does_product_exist(self,product):
@@ -57,11 +57,11 @@ class DBMethods:
             return product
         return False
 
-    def update_product(self, product, quantity, price, product_id, reg_date):
+    def update_product(self, product, quantity, price, product_id):
         """This method updates the product"""
         try:
-            query = ("""UPDATE products SET product = '{}', quantity = '{}', price = '{}', reg_date = '{}' where product_id = '{}'""" .format(
-                product, quantity, price, product_id, reg_date ))
+            query = ("""UPDATE products SET product = '{}', quantity = '{}', price = '{}' where product_id = '{}'""" .format(
+                product, quantity, price, product_id))
             self.cursor.execute(query)
             count = self.cursor.rowcount
             if int(count) > 0:
@@ -91,4 +91,42 @@ class DBMethods:
         if int(delete) > 0:
             return True
         else:
-            return False   
+            return False 
+
+    def create_sale_record(self, product, quantity, amount, attendant, date):
+        """This method creates a sale record"""
+        query = (
+            """INSERT INTO sales (product, quantity, amount, attendant, date) 
+               VALUES ('{}', '{}', '{}', '{}', '{}')""".format(product, quantity, amount, attendant, date))
+        self.cursor.execute(query)
+    
+    def get_new_sale(self):
+        """This method gets the most recent sale record being made """ 
+        self.cursor.execute("SELECT * FROM sales ORDER BY sale_id DESC LIMIT 1")
+        new_record = self.cursor.fetchall()
+        return new_record
+
+    def get_all_sales(self):
+        """This method gets all available sales"""
+        self.cursor.execute("SELECT * from sales")
+        all_sales = self.cursor.fetchall()
+        return all_sales
+
+    def get_all_sales_for_user(self, username):
+        """This method gets all available sales"""
+        self.cursor.execute("SELECT * FROM sales WHERE attendant = '{}'" .format(username))
+        sale_record = self.cursor.fetchall()
+        return sale_record 
+
+    def get_single_sale(self, sale_id):
+        """This method gets the most recent sale record made"""
+        self.cursor.execute("SELECT * FROM sales WHERE sale_id = '{}'" .format(sale_id))
+        sale_record = self.cursor.fetchall()
+        return sale_record
+
+    def get_single_sale_for_user(self, sale_id, username):
+        """This method gets the most recent sale record made"""
+        self.cursor.execute("SELECT * FROM sales WHERE sale_id = '{}' AND attendant = '{}'" .format(sale_id, username))
+        sale_record = self.cursor.fetchall()
+        return sale_record    
+  

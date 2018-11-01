@@ -32,10 +32,9 @@ class DatabaseConnection:
             """
 			CREATE TABLE IF NOT EXISTS products (
 				product_id SERIAL PRIMARY KEY,
-					product VARCHAR(50) NOT NULL,
+					product VARCHAR(25) NOT NULL,
 					quantity INTEGER NOT NULL,
-					price INTEGER NOT NULL,
-                    reg_date timestamp NOT NULL
+					price INTEGER NOT NULL
 							
 						)
 					"""
@@ -44,7 +43,7 @@ class DatabaseConnection:
             """
             CREATE TABLE IF NOT EXISTS sales (
                 sale_id SERIAL PRIMARY KEY,
-                product VARCHAR(50) NOT NULL,
+                product VARCHAR(25) NOT NULL,
                 quantity INTEGER NOT NULL,
                 amount INTEGER NOT NULL,
                 attendant VARCHAR(50) NOT NULL,
