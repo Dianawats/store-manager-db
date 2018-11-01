@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Dianawats/store-manager-db.svg?branch=develop-db)](https://travis-ci.org/Dianawats/store-manager-db)
+[![Coverage Status](https://coveralls.io/repos/github/Dianawats/store-manager-db/badge.svg?branch=develop-db)](https://coveralls.io/github/Dianawats/store-manager-db?branch=develop-db)
 # store-manager
 
 ### Project Overview
