@@ -138,7 +138,7 @@ class CreateSalesRecord(MethodView):
             if make_sale:
                 return jsonify({"message": "sale record added successfully", "sales": db_meth.get_new_sale()}), 201
             else:
-                return jsonify({"message": "sale record is not added or product is not available"}), 400
+                return jsonify({"message": "sale record is not added or no available product"}), 400
 
 class GetSingleSaleRecord(MethodView):
     @jwt_required
