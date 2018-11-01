@@ -6,7 +6,9 @@ python:
 install:
     - pip install -r requirements.txt
 
-script:
+before_script:
+    - psql -c "CREATE ROLE dianna WITH SUPERUSER LOGIN PASSWORD 'keko';" -U postgres
+    - psql -c "CREATE DATABASE storemanager;" -U postgres
     - nosetests -v --with-coverage --cover-package=app
 
 after_success:
