@@ -27,7 +27,7 @@ class UserHandler:
             return True
         return False
 
-    def check_whether_phone_exists(self, phone):
+    def check_whether_phone_exist(self, phone):
         """
         This method checks whether the phone supplied already exists
         """

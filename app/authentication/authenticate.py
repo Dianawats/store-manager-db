@@ -16,7 +16,6 @@ auth_blueprint = Blueprint("auth_blueprint", __name__)
 class RegisterStoreAttendant(MethodView):
     @requires_admin_permission
     def post(self):
-        #registers a store attendant
         data = request.get_json()
         search_keys = ("username", "phone", "role", "password")
         if all(key in data.keys() for key in search_keys):
@@ -24,27 +23,22 @@ class RegisterStoreAttendant(MethodView):
             phone = data.get("phone")
             role = data.get("role")
             password = data.get("password")
-        
+
             invalid = validate.user_validator(username, phone, role, password)
             if invalid:
                 return jsonify({"message": invalid}), 400
             username_exists = user_handler.check_whether_user_exists(username=username)
             if username_exists:
-                return jsonify({"message": "username already exists"}), 409
+                return jsonify({"message": "username exists"}), 409
             phone_exists = user_handler.check_whether_phone_exists(phone=phone)
             if phone_exists:
-                return jsonify({"message": "phone already exists"}), 409
-            new_user = user_handler.add_attendant(username=username,
-                                                  phone=phone,
-                                                  role=role, 
-                                                  password=password)
+                return jsonify({"message": "phone exists"}), 409
+            new_user = user_handler.add_attendant(username=username,phone=phone,role=role, password=password)
             if new_user:
-                return jsonify({"message": 
-                                "Store Attendant account has been created"}), 201
+                return jsonify({"message": "Attendant account has been created"}), 201
             else:
-                return jsonify({"message": "No Account created yet"}), 400
-        return jsonify({"message": 
-                        "You missed some key in your registration body"}), 400
+                return jsonify({"message": "Account not yet created"}), 400
+        return jsonify({"message": "You missed some key in your registration body"}), 400
 
 class LoginView(MethodView):
     """
