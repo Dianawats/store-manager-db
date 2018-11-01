@@ -10,8 +10,8 @@ user_handler = UserHandler()
 class BaseTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.username = "diana"
-        self.phone = "0700-687656"
+        self.username = "beutrice"
+        self.phone = "0700-607656"
         self.role = "admin"
         self.password = "watson"
         self.app = app.test_client(self)
@@ -27,7 +27,7 @@ class BaseTestCase(unittest.TestCase):
         user_handler.add_attendant(self.username, self.phone, self.role, self.password)
         
     def register_attendant(self):
-        user_handler.add_attendant("dian", "0700-687658", "attendant", "wats")
+        user_handler.add_attendant("carol", "0700-600658", "attendant", "diate")
     
     def admin_login(self):
         response = self.app.post(
