@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/Dianawats/store-manager-db.svg?branch=develop-db)](https://travis-ci.org/Dianawats/store-manager-db)
 [![Coverage Status](https://coveralls.io/repos/github/Dianawats/store-manager-db/badge.svg?branch=develop-db)](https://coveralls.io/github/Dianawats/store-manager-db?branch=develop-db)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0e8d6a26c54142b3a2b367fbabcf4b82)](https://www.codacy.com/app/Dianawats/store-manager-db?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Dianawats/store-manager-db&amp;utm_campaign=Badge_Grade)
 # store-manager
 
 ### Project Overview
