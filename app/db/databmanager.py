@@ -22,7 +22,7 @@ class DatabaseConnection:
             """
             CREATE TABLE IF NOT EXISTS users (
                 user_id SERIAL PRIMARY KEY,
-                username VARCHAR(50) unique,
+                username VARCHAR(50),
                 phone VARCHAR(50) NOT NULL,
                 role VARCHAR(10) NOT NULL,
                 password VARCHAR(25) NOT NULL

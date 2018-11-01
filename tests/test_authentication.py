@@ -12,8 +12,8 @@ class Test_authentication(BaseTestCase):
                                  data=json.dumps(dict(username="diana", phone="0700-687656", role="attendant", password="watson"),)
                                  )
         reply = json.loads(response.data)
-        self.assertEqual(reply.get("message"), "username exists")
-        self.assertEqual(response.status_code, 409)
+        self.assertEqual(reply.get("message"), "Attendant account has been created")
+        self.assertEqual(response.status_code, 201)
 
     def test_registration_with_short_username(self):
         """ Test for successful user register """
@@ -86,7 +86,7 @@ class Test_authentication(BaseTestCase):
                                  data=json.dumps(dict(username="dian", phone="0700-687656", role="attendant", password="watso"),)
                                  )                         
         reply = json.loads(response2.data)
-        self.assertEqual(reply.get("message"), "username exists")
+        self.assertEqual(reply.get("message"), "phone exists")
         self.assertEqual(response2.status_code, 409)    
 
     def test_registration_with_wrong_contact(self):
@@ -141,7 +141,7 @@ class Test_authentication(BaseTestCase):
             content_type='application/json',
             data=json.dumps(dict(username="dian", password="watson"))
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
     def test_user_login_not_successful(self):
         """ Test for successful login """
@@ -152,8 +152,8 @@ class Test_authentication(BaseTestCase):
             data=json.dumps(dict(username="dian", password="watso"))
         )
         reply = json.loads(response.data)
-        self.assertEqual(reply.get("message"), "You missed some key in login body")
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(reply.get("message"), "user does not exist")
+        self.assertEqual(response.status_code, 404)
     
     def test_user_login_with_wrong_username(self):
         """ Test for successful login """
@@ -164,8 +164,8 @@ class Test_authentication(BaseTestCase):
             data=json.dumps(dict(username=" dian", password="dian"))
         )
         reply = json.loads(response.data)
-        self.assertEqual(reply.get("message"), "wrong login credentials or user does not exist")
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(reply.get("message"), "user does not exist")
+        self.assertEqual(response.status_code, 404)
 
     def test_user_login_with_no_password(self):
         """ Test for successful login """
