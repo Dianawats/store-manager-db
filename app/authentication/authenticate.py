@@ -30,7 +30,7 @@ class RegisterStoreAttendant(MethodView):
             username_exists = user_handler.check_whether_user_exists(username=username)
             if username_exists:
                 return jsonify({"message": "username exists"}), 409
-            phone_exists = user_handler.check_whether_phone_exists(phone=phone)
+            phone_exists = user_handler.check_whether_phone_exist(phone=phone)
             if phone_exists:
                 return jsonify({"message": "phone exists"}), 409
             new_user = user_handler.add_attendant(username=username,phone=phone,role=role, password=password)
