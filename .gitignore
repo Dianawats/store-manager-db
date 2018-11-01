@@ -1,7 +1,7 @@
 .vscode/
 ven/
 venv/
-__pycache__
+/__pycache__
 .pytest_cache
 app/__pycache__
 tests/__pycache__
@@ -16,3 +16,11 @@ app/authentication/*.pyc
 app/handlers/*.pyc
 app/db/*.pyc
 app/models/*.pyc
+app/models/__pycache__/
+app/handlers/__pycache__/
+app/db/__pycache__/
+authentication/__pycache__/
+./__pycache__/
+./pytest_cache/
+/venv/
+/vscode/
