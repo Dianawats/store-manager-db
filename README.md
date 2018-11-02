@@ -63,8 +63,8 @@ $ CREATE TABLE products
 $ CREATE TABLE sales
 ```
 
-
 ##Heroku deployment:
+
 
 ## Author
 
