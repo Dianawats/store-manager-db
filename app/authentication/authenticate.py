@@ -14,7 +14,7 @@ user_handler = UserHandler()
 auth_blueprint = Blueprint("auth_blueprint", __name__)
 
 class RegisterStoreAttendant(MethodView):
-    @requires_admin_permission
+    # @requires_admin_permission
     def post(self):
         data = request.get_json()
         search_keys = ("username", "phone", "role", "password")
@@ -56,7 +56,7 @@ class LoginView(MethodView):
                 return jsonify({"message": invalid}), 400
 
             user_token = {}
-            expires = datetime.timedelta(days=2)
+            expires = datetime.timedelta(days=1)
             given_access = user_handler.user_login(username=username, password=password)
             if given_access:
                 access_token = create_access_token(identity= given_access["username"], 

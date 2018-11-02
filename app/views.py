@@ -16,7 +16,6 @@ db_meth = DBMethods()
 product_handler = ProductHandler()
 views_blueprint = Blueprint("views_blueprint", __name__)
 
-
 class AddProduct(MethodView):
     @requires_admin_permission
     def post(self):

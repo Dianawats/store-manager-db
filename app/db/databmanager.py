@@ -9,13 +9,23 @@ class DatabaseConnection:
 
     def __init__(self):
         self.conn = psycopg2.connect(
-            database="dfl7iiig7sctr2", 
-            user="gykwkorsmzhxiq", 
-            password="d625fbdf55820d48242f0601b7353a5a6db8d12b06fb9ad95be27a8bd2bea5df", 
-            host="ec2-54-204-14-96.compute-1.amazonaws.com", 
+            database="storemanager", 
+            user="postgres", 
+            password="keko", 
+            host="localhost", 
             port="5432")
         self.conn.autocommit = True
         self.dict_cursor = self.conn.cursor(cursor_factory=extra.RealDictCursor)
+
+    # def __init__(self):
+    #     self.conn = psycopg2.connect(
+    #         database="dfl7iiig7sctr2", 
+    #         user="gykwkorsmzhxiq", 
+    #         password="d625fbdf55820d48242f0601b7353a5a6db8d12b06fb9ad95be27a8bd2bea5df", 
+    #         host="ec2-54-204-14-96.compute-1.amazonaws.com", 
+    #         port="5432")
+    #     self.conn.autocommit = True
+    #     self.dict_cursor = self.conn.cursor(cursor_factory=extra.RealDictCursor)
 
     def create_tables(self):
         queries = (
