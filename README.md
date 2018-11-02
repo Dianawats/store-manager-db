@@ -30,7 +30,7 @@ records. This application is meant for use in a single store..
     - Fetch a single sale record
     - Create a product
     - Create a sale order
-    - Update a prooduct item
+    - Update a product item
     - Delete a product item
 ```
 
