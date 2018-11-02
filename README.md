@@ -13,18 +13,47 @@ records. This application is meant for use in a single store..
 - `Python3.6` - Programming language that lets you work more quickly
 - `Flask` - Python based web framework
 - `Virtualenv` - A tool to create isolated virtual environment
+- `PostgreSQl` - An Open source relational database 
 
-## Project links:
+## Project branch link:
+```sh
+   $ git clone https://github.com/Dianawats/store-manager-db
+   ```
 
-### API Endpoints
+## API Endpoints
 ```
-- Admin can create a store attendant user account.
-- Admin and store attendants can signin/signout from the application.
-- Admin can Modify a product.
-- Admin can Delete a product.
+    - Login
+    - Create an attendant's account
+    - Fetch all products
+    - Fetch a single product record
+    - Fetch all sale records
+    - Fetch a single sale record
+    - Create a product
+    - Create a sale order
+    - Update a prooduct item
+    - Delete a product item
 ```
 
+## Endpoints to create an attendants account and login into the application
+HTTP Method|End point | Public Access|Action
+-----------|----------|--------------|------
+POST | /api/auth/register | False | Create an attendant's account
+POST | /api/auth/login | True | Login a user
 
+## Endpoints to create, views available products and create sale records
+HTTP Method|End point | Public Access|Action
+-----------|----------|--------------|------
+POST | /api/v2/products | False | Create a product
+POST | /api/v2/sales | False | Create a sale order
+GET | /api/v2/products | False | Fetch all available products
+GET | /api/v2/products/<product_id> | False | Fetch details of a single product
+DELETE | /api/v2/products/<product_id> | False | Delete a single product
+PUT | /api/v2/products/<product_id> | False | Edit details of a single product
+GET | /api/v2/sales/<sale_id> | False | Fetch details of a single sale record
+GET | /api/v2/sales | False | Fetch all sale records created
+PUT | /api/auth/users | False | Change the role of an attendant
+
+### Heroku deployment:
 
 ## Author
 
@@ -35,4 +64,5 @@ records. This application is meant for use in a single store..
 * Andela Software Development Community
 * Inspiration
 * Bootcamp 13 team-mates
+
 
