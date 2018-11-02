@@ -3,11 +3,11 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0e8d6a26c54142b3a2b367fbabcf4b82)](https://www.codacy.com/app/Dianawats/store-manager-db?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Dianawats/store-manager-db&amp;utm_campaign=Badge_Grade)
 # store-manager
 
-## Project Overview
+### Project Overview
 Store Manager is a web application that helps store owners manage sales and product inventory
 records. This application is meant for use in a single store..
 
-## Prerequisites
+### Prerequisites
 
 ##Built with;
 - `Python3.6` - Programming language that lets you work more quickly
@@ -15,12 +15,12 @@ records. This application is meant for use in a single store..
 - `Virtualenv` - A tool to create isolated virtual environment
 - `PostgreSQl` - An Open source relational database 
 
-##Project branch link:
+## Project branch link:
 ```sh
    $ git clone https://github.com/Dianawats/store-manager-db
    ```
 
-##API Endpoints
+## API Endpoints
 ```
     - Login
     - Create an attendant's account
@@ -34,13 +34,13 @@ records. This application is meant for use in a single store..
     - Delete a product item
 ```
 
-##Endpoints to create an attendants account and login into the application
+## Endpoints to create an attendants account and login into the application
 HTTP Method|End point | Public Access|Action
 -----------|----------|--------------|------
 POST | /api/auth/register | False | Create an attendant's account
 POST | /api/auth/login | True | Login a user
 
-##Endpoints to create, views available products and create sale records
+## Endpoints to create, views available products and create sale records
 HTTP Method|End point | Public Access|Action
 -----------|----------|--------------|------
 POST | /api/v2/products | False | Create a product
@@ -53,7 +53,7 @@ GET | /api/v2/sales/<sale_id> | False | Fetch details of a single sale record
 GET | /api/v2/sales | False | Fetch all sale records created
 PUT | /api/auth/users | False | Change the role of an attendant
 
-##Install all the necessary dependencies by
+## Install all the necessary dependencies by
 ```
 $ pip install -r requirements.txt
 $ Install PostgreSQL
@@ -63,8 +63,8 @@ $ CREATE TABLE products
 $ CREATE TABLE sales
 ```
 
-##Heroku deployment:
 
+### Heroku deployment:
 
 ## Author
 
