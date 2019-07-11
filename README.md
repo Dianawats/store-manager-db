@@ -68,7 +68,7 @@ $ CREATE TABLE sales
 
 ## Author
 
-## Diana Nakiwala**
+## Diana Watson**
 
 ## Acknowledgments
 
